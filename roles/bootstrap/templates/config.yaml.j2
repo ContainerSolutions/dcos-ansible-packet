@@ -1,0 +1,12 @@
+---
+bootstrap_url: http://{{ ansible_bond0_0.ipv4.address }}:5000
+cluster_name: 'my-cluster'
+exhibitor_storage_backend: static
+ip_detect_filename: /genconf/ip-detect
+master_discovery: static
+master_list:
+- {{ hostvars[groups['masters'][0]]['ansible_bond0_0']['ipv4']['address'] }}
+resolvers:
+- 8.8.4.4
+- 8.8.8.8
+use_proxy: 'false'

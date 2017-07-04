@@ -20,3 +20,4 @@
 - hosts: bootstrap            
   roles:
     - role: bootstrap
+  tags: bootstrap
