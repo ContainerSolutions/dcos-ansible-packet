@@ -1,10 +1,11 @@
 ---
+
 - hosts: all
   tasks:
 
       - name: Setup IP whitelist firewall
         script: setup_ip_whitelist.sh >> setup_ip_whitelist.log
-        tags: firewall            
+        tags: firewall,base            
     
       - name: Install Packages
         yum: pkg={{item}} state=installed 
@@ -15,9 +16,66 @@
           - unzip
           - curl
           - docker
-        tags: packages
+        tags: packages,base
+        
+      - name: Setup Docker overlay storage driver
+        copy: src=docker-storage dest=/etc/sysconfig/docker-storage owner=root group=root
+        tags: docker,base
+        notify:
+          - Restart Docker
+        changed_when: true
+        
+      - group:
+          name: nogroup
+          state: present  
+        tags: group,base
 
+      - group:
+          name: docker
+          state: present
+        tags: group, base          
+        
+  handlers:          
+        
+      - name: Restart Docker
+        systemd:
+          name: docker
+          enabled: yes
+          state: restarted
+        tags: docker,base            
+        
 - hosts: bootstrap            
   roles:
     - role: bootstrap
   tags: bootstrap
+ 
+- hosts: masters, agents
+
+  tasks:
+  
+      - name: Download DC/OS install script
+        shell: wget http://10.80.33.135:5000/dcos_install.sh; chmod 755 dcos_install.sh
+        args:
+          creates: dcos_install.sh
+        tags: download-installer
+  
+- hosts: masters
+
+  tasks:
+  
+      - name: Install DC/OS masters
+        shell: /root/dcos_install.sh master
+        args:
+          creates: /etc/systemd/system/dcos.target      
+        tags: install-master
+        
+- hosts: agents
+
+  tasks:
+  
+      - name: Install DC/OS masters
+        shell: /root/dcos_install.sh slave > dcos_install.log
+        args:
+          creates: /etc/systemd/system/dcos.target      
+        tags: install-agent
+        

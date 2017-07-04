@@ -1,11 +1,4 @@
 ---
-- name: Docker should be running                                                                        
-  systemd:
-    name: docker
-    enabled: yes
-    state: started
-  tags: docker        
-
 - name: Ensures genconf dir exists
   file: path=genconf state=directory
   tags: genconf
@@ -65,4 +58,4 @@
     volumes:
       - "/root/genconf/serve:/usr/share/nginx/html:ro" 
     ports:
-      - "80:5000"
+      - "5000:80"

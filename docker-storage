@@ -1,0 +1,2 @@
+DOCKER_STORAGE_OPTIONS= --storage-driver=overlay
+
