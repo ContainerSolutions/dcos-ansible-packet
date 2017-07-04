@@ -10,6 +10,10 @@
   file: path=genconf state=directory
   tags: genconf
 
+- name: Copy ip-detect script
+  copy: src=files/ip-detect dest=genconf/ip-detect owner=root group=root mode=0755
+  tags: ipdetect
+
 - name: Copy config.yaml template
   template: src=templates/config.yaml.j2 dest=genconf/config.yaml owner=root group=root
   tags: config
