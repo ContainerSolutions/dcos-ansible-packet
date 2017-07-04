@@ -1,0 +1,15 @@
+[bootstrap]
+
+bootstrap ansible_host=147.75.82.183
+
+[agents]
+
+agent1 ansible_host=147.75.205.11
+agent2 ansible_host=147.75.205.79
+agent3 ansible_host=147.75.82.173
+
+[masters]
+
+master ansible_host=147.75.205.45
+
+
