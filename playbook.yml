@@ -48,6 +48,9 @@
   roles:
     - role: bootstrap
   tags: bootstrap
+  vars_files:
+    - vars.yaml.example
+    - vars.yaml
  
 - hosts: masters, agents
 
