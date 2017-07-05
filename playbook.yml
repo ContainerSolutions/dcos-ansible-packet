@@ -50,18 +50,21 @@
   tags: bootstrap
   vars_files:
     - vars.yaml.example
-    - vars.yaml
- 
+
 - hosts: masters, agents
 
   tasks:
   
-      - name: Download DC/OS install script
-        shell: wget http://10.80.33.135:5000/dcos_install.sh; chmod 755 dcos_install.sh
+      - name: Download DC/OS install script from bootstrap nginx server
+        shell: wget http://{{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:5000/dcos_install.sh; chmod 755 dcos_install.sh
         args:
           creates: dcos_install.sh
         tags: download-installer
-  
+
+      - debug:
+          msg: "Downloading DC/OS install script from bootstrap nginx server {{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}"
+        tags: download-installer
+
 - hosts: masters
 
   tasks:
