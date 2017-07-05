@@ -33,7 +33,7 @@
   yum_repository:
     name: extras
     description: EPEL YUM repo
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    baseurl: "{{ epel_repo_url }}"
   tags: nginx
 
 - name: Ensure epel-release is installed
