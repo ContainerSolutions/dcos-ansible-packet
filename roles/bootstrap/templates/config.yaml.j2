@@ -7,6 +7,7 @@ master_discovery: static
 master_list:
 - {{ hostvars[groups['masters'][0]]['ansible_bond0_0']['ipv4']['address'] }}
 resolvers:
-- 8.8.4.4
-- 8.8.8.8
+{% for dns_server in dns_servers %}
+  - {{ dns_server }}
+{% endfor %}
 use_proxy: 'false'

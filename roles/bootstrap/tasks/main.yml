@@ -4,19 +4,29 @@
   tags: genconf
 
 - name: Copy ip-detect script
-  copy: src=files/ip-detect dest=genconf/ip-detect owner=root group=root mode=0755
+  copy: src=files/ip-detect dest=/root/genconf/ip-detect owner=root group=root mode=0755
   tags: ipdetect
 
 - name: Copy config.yaml template
-  template: src=templates/config.yaml.j2 dest=genconf/config.yaml owner=root group=root
+  template: src=templates/config.yaml.j2 dest=/root/genconf/config.yaml owner=root group=root
   tags: config
 
 - debug:
-    msg: "Downloading and run DC/OS generate config script from {{ dcos_download_url }}"
-  
-- name: Setup bootstrap node                                                                            
-  command: wget '{{ dcos_download_url }}' -O dcos_generate_config.sh; bash dcos_generate_config.sh > dcos_generate_config.log
-  tags: bootstrap-init          
+    msg: "Downloading and run dcos_generate_config.sh from {{ dcos_download_url }}"
+
+- name: Download dcos_generate_config.sh
+  get_url:
+    url: "{{ dcos_download_url }}"
+    dest: /root/dcos_generate_config.sh
+    mode: 755
+  tags: dcos_generate_config
+  when: not ansible_check_mode
+
+- name: Execute dcos_generate_config.sh
+  shell: /root/dcos_generate_config.sh
+  args:
+   creates: /etc/systemd/system/dcos.target
+  tags: dcos_generate_config
   when: not ansible_check_mode
 
 - name: Add repository
