@@ -1,3 +1,3 @@
 ---
 dcos_download_url: https://downloads.dcos.io/dcos/stable/commit/0ce03387884523f02624d3fb56c7fbe2e06e181b/dcos_generate_config.sh?ga=2.120260296.1545129356.1499066263-1637564556.1479832876
-
+bootstrap_server_port: 5000
