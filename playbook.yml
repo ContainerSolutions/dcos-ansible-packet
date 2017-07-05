@@ -56,9 +56,10 @@
   tasks:
   
       - name: Download DC/OS install script from bootstrap nginx server
-        shell: wget http://{{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:5000/dcos_install.sh; chmod 755 dcos_install.sh
-        args:
-          creates: dcos_install.sh
+        get_url:
+          url: http://{{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:5000/dcos_install.sh
+          dest: /root/dcos_install.sh
+          mode: 755
         tags: download-installer
 
       - debug:
