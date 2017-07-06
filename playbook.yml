@@ -1,8 +1,10 @@
 ---
 
-- hosts: masters
+- hosts: masters, agents
 
   gather_facts: True
+
+  tags: facts
 
 - hosts: bootstrap
 

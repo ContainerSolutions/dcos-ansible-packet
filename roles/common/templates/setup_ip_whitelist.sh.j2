@@ -3,33 +3,39 @@
 ipset create whitelist -! hash:ip
 
 # User IPs
-ipset add whitelist -! 85.191.81.60
-ipset add whitelist -! 83.85.190.253
-ipset add whitelist -! 92.111.228.8
+{% for local_ip in local_ips %}
+ipset add whitelist -! {{ local_ip }}
+{% endfor %}
 
-# Public cluster IPs
-ipset add whitelist -! 147.75.82.183
-ipset add whitelist -! 147.75.205.45
-ipset add whitelist -! 147.75.82.173
-ipset add whitelist -! 147.75.205.79
-ipset add whitelist -! 147.75.205.11
+# Public master IPs
+{% for host in groups['masters'] %}
+ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
+{% endfor %}
 
-# Private cluster IPs
-ipset add whitelist -! 10.80.33.137
-ipset add whitelist -! 10.80.33.131
-ipset add whitelist -! 10.80.33.129
-ipset add whitelist -! 10.80.33.133
-ipset add whitelist -! 10.80.33.135
+# Public agent IPs
+{% for host in groups['agents'] %}
+ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
+{% endfor %}
+
+# Private master IPs
+{% for host in groups['masters'] %}
+ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
+{% endfor %}
+
+# Private agent IPs
+{% for host in groups['agents'] %}
+ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
+{% endfor %}
 
 # Loopback
-ipset add whitelist -! 127.0.0.1
+ipset add whitelist -! {{ loopback_ip }}
 
-# Spartan
-ipset add whitelist -! 198.51.100.1
-ipset add whitelist -! 198.51.100.2
-ipset add whitelist -! 198.51.100.3
+# Spartan IPs
+{% for spartan_ip in spartan_ips %}
+ipset add whitelist -! {{ spartan_ip }}
+{% endfor %}
 
-# Google DNS
+# DNS servers
 {% for dns_server in dns_servers %}
 ipset add whitelist -! {{ dns_server }}
 {% endfor %}
