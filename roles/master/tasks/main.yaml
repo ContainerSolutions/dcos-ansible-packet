@@ -1,0 +1,6 @@
+---
+- name: Install DC/OS masters
+  shell: /root/dcos_install.sh master
+  args:
+    creates: /etc/systemd/system/dcos.target
+  tags: install-master
