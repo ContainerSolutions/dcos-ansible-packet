@@ -1,0 +1,7 @@
+---
+
+hosts: masters, agents
+
+- name: Ensure DC/OS is uninstalled
+  script: uninstall_dcos.sh
+
