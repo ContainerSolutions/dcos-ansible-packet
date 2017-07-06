@@ -1,0 +1,6 @@
+---
+- name: Install DC/OS masters
+  shell: /root/dcos_install.sh slave > dcos_install.log
+  args:
+    creates: /etc/systemd/system/dcos.target
+  tags: install-agent
