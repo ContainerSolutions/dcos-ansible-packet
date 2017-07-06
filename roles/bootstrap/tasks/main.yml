@@ -49,27 +49,29 @@
   yum: pkg=python2-pip state=installed 
   tags: nginx
 
-- name: Ensure old docker-py module not present
+- name: Ensure old docker-py module is absent
   pip:
     name: docker-py
     state: absent
   tags: nginx
-    
-- pip:
+
+- name: Ensure docker module is present
+  pip:
     name: docker
   tags: nginx
   
-- pip:
+- name: Ensure docker-compose module is present
+  pip:
     name: docker-compose
   tags: nginx  
     
-- name: Run nginx container
+- name: Ensure nginx container is running
   tags: nginx
   docker_container:
     name: bootstrap-nginx
     state: started
-    detach: True
-    image: nginx:1.12
+    command: nginx -g "daemon off;"
+    image: nginx:1.13
     volumes:
       - "/root/genconf/serve:/usr/share/nginx/html:ro" 
     ports:
