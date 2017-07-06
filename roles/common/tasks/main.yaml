@@ -19,7 +19,7 @@
   tags: packages, common
 
 - name: Setup Docker overlay storage driver
-  copy: src=docker-storage dest=/etc/sysconfig/docker-storage owner=root group=root
+  copy: src=files/docker-storage dest=/etc/sysconfig/docker-storage owner=root group=root
   tags: docker,base
   notify:
     - Restart Docker
