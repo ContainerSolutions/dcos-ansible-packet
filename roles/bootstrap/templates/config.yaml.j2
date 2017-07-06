@@ -1,11 +1,13 @@
 ---
-bootstrap_url: http://{{ ansible_bond0_0.ipv4.address }}:{{ bootstrap_server_port }}
+bootstrap_url: http://{{ hostvars[inventory_hostname]['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}
 cluster_name: 'my-cluster'
 exhibitor_storage_backend: static
 ip_detect_filename: /genconf/ip-detect
 master_discovery: static
 master_list:
-- {{ hostvars[groups['masters'][0]]['ansible_bond0_0']['ipv4']['address'] }}
+{% for master in groups['masters'] %}
+  - {{ hostvars[master]['ansible_bond0_0']['ipv4']['address'] }}
+{% endfor %}
 resolvers:
 {% for dns_server in dns_servers %}
   - {{ dns_server }}
