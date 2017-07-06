@@ -65,13 +65,13 @@
   
       - name: Download DC/OS install script from bootstrap nginx server
         get_url:
-          url: "http://{{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
+          url: "http://{{ hostvars['bootstrap']['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
           dest: /root/dcos_install.sh
           mode: 755
         tags: download-installer
 
       - debug:
-          msg: "Downloading DC/OS install script from bootstrap nginx server {{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
+          msg: "Downloading DC/OS install script from bootstrap nginx server {{ hostvars['bootstrap']['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
         tags: download-installer
 
   vars_files:
