@@ -11,9 +11,6 @@
   template: src=templates/config.yaml.j2 dest=/root/genconf/config.yaml owner=root group=root
   tags: config
 
-- debug:
-    msg: "Downloading and run dcos_generate_config.sh from {{ dcos_download_url }}"
-
 - name: Download dcos_generate_config.sh
   get_url:
     url: "{{ dcos_download_url }}"
