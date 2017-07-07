@@ -1,11 +1,4 @@
 ---
-- name: Ensure firewall script is uploaded
-  template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755
-  tags: firewall, common
-
-- name: Ensure firewall script is executed
-  shell: ./setup_ip_whitelist.sh
-  tags: firewall, common
 
 - name: Install Packages
   yum: pkg={{item}} state=installed
@@ -18,12 +11,24 @@
     - docker
   tags: packages, common
 
-- name: Setup Docker overlay storage driver
+- name: Ensure firewall script is uploaded
+  template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755
+  tags: firewall, common
+
+- name: Ensure firewall script is executed
+  shell: ./setup_ip_whitelist.sh
+  tags: firewall, common
+
+- name: Ensure Docker overlay storage driver is configured
   copy: src=files/docker-storage dest=/etc/sysconfig/docker-storage owner=root group=root
-  tags: docker,base
-  notify:
-    - Restart Docker
-  changed_when: true
+  tags: docker, common
+
+- name: Ensure Docker is running
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+  tags: docker, common
 
 - group:
     name: nogroup
