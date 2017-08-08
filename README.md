@@ -12,4 +12,8 @@ Create an `inventory` file with the following:
 
 ```$ ansible-playbook -i inventory playbook.yml```
 
+## How to update the firewall
 
+Add an IP to `local_ips` list in `vars.yaml.example` and run
+
+```$ ansible-playbook -i inventory playbook.yml -t firewall```
