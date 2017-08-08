@@ -2,8 +2,14 @@
 
 ## Prerequisites
 
-* 1 Bootstrap node
-* 1 Master node
-* 3 Agent nodes, 1 public and 2 private
+Create an `inventory` file with the following:
+
+* 1 bootstrap node
+* 1 master node
+* 3 agent nodes
+
+## How to Run
+
+```$ ansible-playbook -i inventory playbook.yml```
 
 
