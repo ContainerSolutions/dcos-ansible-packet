@@ -8,10 +8,12 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 ## Prerequisites
 
-* Create an `inventory` file with a single master and at least 3 agents. The master node can be both a
-bootstrap and master node which saves costs. See the example below.
+* Create 4 machines or cloud instances, 1 master and 3 agents.
 
-* Add hostnames and IPs to `/etc/hosts`
+* Add their hostnames and IPs to `/etc/hosts`
+
+* Create an `inventory` file. The master node can be both a
+bootstrap and master node which saves costs. See the example below.
 
 * SSH into the nodes so your pub key is authorized and Ansible SSH works
 
@@ -24,18 +26,17 @@ Use the following inventory file and change the IPs
 ```
 [bootstrap]
 
-master1 ansible_host=1.1.1.1 ansible_user=root
-
-[agents]
-
-agent1 ansible_host=11.11.11.11 ansible_user=root
-agent2 ansible_host=22.22.22.22 ansible_user=root
-agent3 ansible_host=33.33.33.33 ansible_user=root
+master1 ansible_user=root
 
 [masters]
 
-master1 ansible_host=1.1.1.1 ansible_user=root
+master1 ansible_user=root
 
+[agents]
+
+agent1 ansible_user=root
+agent2 ansible_user=root
+agent3 ansible_user=root
 ```
 
 ## How to deploy
