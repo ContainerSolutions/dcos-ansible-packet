@@ -12,7 +12,7 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 * Add their hostnames and IPs to `/etc/hosts`
 
-* Create an `inventory` file. The master node can be both a
+* Edit the example `inventory` file. The master node has both the
 bootstrap and master node which saves costs. See the example below.
 
 * SSH into the nodes so your pub key is authorized and Ansible SSH works
@@ -21,7 +21,7 @@ bootstrap and master node which saves costs. See the example below.
 
 ## Example inventory file
 
-Use the following inventory file and change the IPs
+Use the example inventory file and add agent nodes if necessary.
 
 ```
 [bootstrap]
