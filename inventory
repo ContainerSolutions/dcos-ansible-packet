@@ -1,15 +1,13 @@
+[masters]
+
+master1 ansible_user=root
+
 [bootstrap]
 
-bootstrap ansible_host=147.75.82.183 ansible_user=root
+master1 ansible_user=root
 
 [agents]
 
-agent1 ansible_host=147.75.205.11 ansible_user=root
-agent2 ansible_host=147.75.205.79 ansible_user=root
-agent3 ansible_host=147.75.82.173 ansible_user=root
-
-[masters]
-
-master ansible_host=147.75.205.45 ansible_user=root
-
-
+agent1 ansible_user=root
+agent2 ansible_user=root
+agent3 ansible_user=root
