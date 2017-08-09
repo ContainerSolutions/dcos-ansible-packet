@@ -7,7 +7,7 @@
     mode: 755
   tags: install-agent
 
-- name: Install DC/OS masters
+- name: Install DC/OS agents
   shell: /root/dcos_install.sh slave > dcos_install.log
   args:
     creates: /etc/systemd/system/dcos.target
