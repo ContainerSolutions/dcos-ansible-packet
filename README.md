@@ -15,7 +15,7 @@ bootstrap and master node which saves costs. See the example below.
 
 * SSH into the nodes so your pub key is authorized and Ansible SSH works
 
-* Test connectivity with `ansible -i inventory m ping all`
+* Test connectivity with `ansible -i inventory -m ping all`
 
 ## Example inventory file
 
