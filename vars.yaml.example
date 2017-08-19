@@ -4,6 +4,7 @@ dcos_download_url: https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_conf
 epel_repo_url: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
 bootstrap_server_port: 5000
 loopback_ip: 127.0.0.1
+cloud: packet
 local_ips:
   - 85.191.81.60
   - 83.85.190.253

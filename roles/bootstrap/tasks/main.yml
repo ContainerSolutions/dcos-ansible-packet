@@ -4,7 +4,7 @@
   tags: genconf
 
 - name: Copy ip-detect script
-  copy: src=files/ip-detect dest=/root/genconf/ip-detect owner=root group=root mode=0755
+  copy: src=files/ip-detect-{{ cloud }}.sh dest=/root/genconf/ip-detect owner=root group=root mode=0755
   tags: ipdetect
 
 - name: Copy config.yaml template
