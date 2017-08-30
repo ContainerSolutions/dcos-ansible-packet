@@ -1,5 +1,9 @@
 ---
 
+- name: Ensure epel-release is installed
+  yum: pkg=epel-release state=installed enablerepo=extras
+  tags: packages, common
+
 - name: Install Packages
   yum: pkg={{item}} state=installed
   with_items:
@@ -9,7 +13,13 @@
     - unzip
     - curl
     - docker
+    - jq
   tags: packages, common
+
+- name: Register Packet VPN IP
+  shell: "curl -s -X GET --header 'Accept: application/json' --header 'X-Auth-Token: {{ packet_auth_token }}' 'https://api.packet.net/user/vpn?code={{ packet_region }}' | jq -r .config | grep remote | cut -d ' ' -f2 | xargs getent hosts | cut -d ' ' -f1"
+  register: packet_vpn_ip
+  tags: firewall, common
 
 - name: Ensure firewall script is uploaded
   template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755

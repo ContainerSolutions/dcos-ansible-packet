@@ -16,3 +16,5 @@ spartan_ips:
   - 198.51.100.1
   - 198.51.100.2
   - 198.51.100.3
+packet_auth_token: foo
+packet_region: ams1

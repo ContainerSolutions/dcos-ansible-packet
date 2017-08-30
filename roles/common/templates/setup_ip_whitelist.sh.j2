@@ -40,6 +40,9 @@ ipset add whitelist -! {{ spartan_ip }}
 ipset add whitelist -! {{ dns_server }}
 {% endfor %}
 
+# Packet VPN IP
+ipset add whitelist -! {{ packet_vpn_ip.stdout }}
+
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -m set ! --match-set whitelist src -j LOG
 iptables -A INPUT -m set ! --match-set whitelist src -j DROP
