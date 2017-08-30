@@ -34,3 +34,12 @@
 
   vars_files:
     - vars.yaml.example
+
+- hosts: public-agents
+
+  roles:
+    - role: common
+    - role: public-agent
+
+  vars_files:
+    - vars.yaml.example
