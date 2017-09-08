@@ -1,4 +1,4 @@
-# DC/OS Ansible
+# DC/OS Ansible Packet
 
 Ansible playbook for setting up a single master DC/OS cluster on Packet Cloud. The cluster will consists of nodes with bootstrap, master and agent roles.
 
