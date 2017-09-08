@@ -1,6 +1,6 @@
 # DC/OS Ansible Packet
 
-Ansible playbook for setting up a single master DC/OS cluster on Packet Cloud. The cluster will consists of nodes with bootstrap, master and agent roles.
+Ansible playbook for setting up a single master DC/OS cluster on Packet Cloud. The cluster will consists of nodes with bootstrap, master, public agent and agent roles.
 
 ## Contact
 
@@ -8,7 +8,7 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 ## Prerequisites
 
-* Create 5 machines or cloud instances, 1 bootstrap, 1 master and 3 or more agents.
+* Create 5 machines or cloud instances, 1 bootstrap, 1 master, 1 public agent and one more agents.
 
 * Add their hostnames and IPs to `/etc/hosts`
 
@@ -35,12 +35,16 @@ master ansible_ssh_host=2.2.2.2 ansible_user=root
 
 agent1 ansible_ssh_host=3.3.3.3 ansible_user=root
 agent2 ansible_ssh_host=4.4.4.4 ansible_user=root
+
+[public-agents]
 agent3 ansible_ssh_host=5.5.5.5 ansible_user=root
 ```
 
 ## How to deploy
 
 ```$ ansible-playbook -i inventory playbook.yml```
+
+After the cluster is installed the bootstrap node can be removed to save costs.
 
 ## How to update the firewall
 
