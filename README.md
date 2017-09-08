@@ -37,6 +37,7 @@ agent1 ansible_ssh_host=3.3.3.3 ansible_user=root
 agent2 ansible_ssh_host=4.4.4.4 ansible_user=root
 
 [public-agents]
+
 agent3 ansible_ssh_host=5.5.5.5 ansible_user=root
 ```
 
