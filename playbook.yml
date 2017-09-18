@@ -1,6 +1,6 @@
 ---
 
-- hosts: masters, agents
+- hosts: masters, agents, public-agents
 
   gather_facts: True
 
@@ -15,7 +15,7 @@
   tags: bootstrap
 
   vars_files:
-    - vars.yaml.example
+    - vars.yaml
 
 - hosts: masters
 
@@ -24,7 +24,7 @@
     - role: master
 
   vars_files:
-    - vars.yaml.example
+    - vars.yaml
 
 - hosts: agents
 
@@ -33,7 +33,7 @@
     - role: agent
 
   vars_files:
-    - vars.yaml.example
+    - vars.yaml
 
 - hosts: public-agents
 
@@ -42,4 +42,4 @@
     - role: public-agent
 
   vars_files:
-    - vars.yaml.example
+    - vars.yaml

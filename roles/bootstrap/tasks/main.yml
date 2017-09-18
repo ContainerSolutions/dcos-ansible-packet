@@ -26,22 +26,6 @@
   tags: dcos_generate_config
   when: not ansible_check_mode
 
-- name: Add repository
-  yum_repository:
-    name: extras
-    description: EPEL YUM repo
-    baseurl: "{{ epel_repo_url }}"
-  tags: nginx
-
-- name: Ensure epel-release is installed
-  yum: pkg=epel-release state=installed enablerepo=extras   
-  tags: nginx
-
-- name: upgrade all packages
-  yum: name=* state=latest
-  tags: nginx
-  when: not ansible_check_mode
-
 - name: Ensure pip is installed
   yum: pkg=python2-pip state=installed 
   tags: nginx
