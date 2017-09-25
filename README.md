@@ -8,7 +8,7 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 ## Prerequisites
 
-* Create 5 machines or cloud instances, 1 bootstrap, 1 master, 1 public agent and one more agents.
+* Create 5 machines or cloud instances, 1 bootstrap, 1 master and one more private agents.
 
 * Add their hostnames and IPs to `/etc/hosts`
 

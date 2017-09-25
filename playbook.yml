@@ -1,6 +1,6 @@
 ---
 
-- hosts: masters, agents, public-agents
+- hosts: masters, agents
 
   gather_facts: True
 
@@ -35,11 +35,3 @@
   vars_files:
     - vars.yaml
 
-- hosts: public-agents
-
-  roles:
-    - role: common
-    - role: public-agent
-
-  vars_files:
-    - vars.yaml

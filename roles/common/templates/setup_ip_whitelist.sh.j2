@@ -22,16 +22,6 @@ ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
 ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
 {% endfor %}
 
-# Public agent public IPs
-{% for host in groups['public-agents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
-{% endfor %}
-
-# Public agent private IPs
-{% for host in groups['public-agents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
-{% endfor %}
-
 # Private master IPs
 {% for host in groups['masters'] %}
 ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
