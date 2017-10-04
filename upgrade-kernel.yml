@@ -1,0 +1,27 @@
+---
+
+- hosts: masters, agents, pubagents
+  become: yes
+  roles:
+    - role: wasilak.centos-kernel
+
+  tasks:
+    - name: Install grub tools
+      yum:
+        name: grub2-tools
+        state: latest
+
+    - name: Update /etc/grub/grub.cfg
+      shell: grub2-mkconfig -o /boot/grub/grub.cfg
+
+    - name: Reboot
+      include_role:
+        name: GROG.reboot
+        vars:
+          become: yes
+          serial: 1
+          reboot_interval: 'yes'
+          reboot_interval_seconds: 30
+          reboot_message: 'Test reboot role'
+
+
