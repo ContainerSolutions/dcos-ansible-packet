@@ -8,7 +8,7 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 ## Prerequisites
 
-* Create 5 machines or cloud instances, 1 bootstrap, 1 master and one more private agents.
+* Create 5 machines or cloud instances, 1 bootstrap, 1 master, 1 public agent and one more agents.
 
 * Add their hostnames and IPs to `/etc/hosts`
 
@@ -36,7 +36,7 @@ master ansible_ssh_host=2.2.2.2 ansible_user=root
 agent1 ansible_ssh_host=3.3.3.3 ansible_user=root
 agent2 ansible_ssh_host=4.4.4.4 ansible_user=root
 
-[public-agents]
+[pubagents]
 
 agent3 ansible_ssh_host=5.5.5.5 ansible_user=root
 ```

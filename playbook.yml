@@ -1,6 +1,6 @@
 ---
 
-- hosts: masters, agents
+- hosts: masters, agents, pubagents
 
   gather_facts: True
 
@@ -35,3 +35,11 @@
   vars_files:
     - vars.yaml
 
+- hosts: pubagents
+
+  roles:
+    - role: common
+    - role: pubagent
+
+  vars_files:
+    - vars.yaml
