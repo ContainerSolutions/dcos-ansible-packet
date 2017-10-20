@@ -17,11 +17,9 @@
     - name: Reboot
       include_role:
         name: GROG.reboot
-        vars:
-          become: yes
-          serial: 1
-          reboot_interval: 'yes'
-          reboot_interval_seconds: 30
-          reboot_message: 'Test reboot role'
-
-
+      vars:
+        become: yes
+        serial: 1
+        reboot_interval: 'yes'
+        reboot_interval_seconds: 30
+        reboot_message: 'Test reboot role'
