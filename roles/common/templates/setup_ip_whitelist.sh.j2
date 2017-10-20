@@ -49,6 +49,3 @@ ipset add whitelist -! {{ spartan_ip }}
 {% for dns_server in dns_servers %}
 ipset add whitelist -! {{ dns_server }}
 {% endfor %}
-
-# Packet VPN IP
-ipset add whitelist -! {{ packet_vpn_ip.stdout }}
