@@ -33,12 +33,21 @@
   register: packet_vpn_ip
   tags: firewall, common
 
-- name: Ensure firewall script is uploaded
+- name: Ensure ipset script is uploaded
   template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755
   tags: firewall, common
 
-- name: Ensure firewall script is executed
+- name: Ensure ipset script is executed
   shell: ./setup_ip_whitelist.sh
+  tags: firewall, common
+
+- name: Set up IPTables
+  iptables_raw:
+    name: allow_related
+    rules: |
+      -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      -A INPUT -m set ! --match-set whitelist src -j LOG --log-level debug --log-prefix "iptables: "
+      -A INPUT -m set ! --match-set whitelist src -j DROP
   tags: firewall, common
 
 - name: Ensure Docker overlay storage driver is configured
