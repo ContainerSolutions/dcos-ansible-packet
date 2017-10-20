@@ -1,0 +1,9 @@
+/var/log/iptables.log {
+  compress
+  rotate 5
+  weekly
+  missingok
+  notifempty
+  create 0600 root root
+  endscript
+}

@@ -37,6 +37,18 @@
   template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755
   tags: firewall, common
 
+- name: Ensure syslog configuration for iptables log file
+  template: src=templates/iptables-rsyslog.conf.j2 dest=/etc/rsyslog.d/iptables.conf mode=644 owner=root group=root mode=644
+  tags: firewall, common
+
+- name: Ensure syslog logrotate configuration
+  template: src=templates/iptables-logrotate.conf.j2 dest=/etc/logrotate.d/iptables mode=644 owner=root group=root mode=644
+  tags: firewall, common
+
+- name: Restart rsyslog
+  service: name=rsyslog state=restarted
+  tags: firewall, common
+
 - name: Ensure ipset script is executed
   shell: ./setup_ip_whitelist.sh
   tags: firewall, common
