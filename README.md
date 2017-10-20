@@ -8,6 +8,8 @@ Frank Scholten [@Frank_Scholten](https://twitter.com/Frank_Scholten)
 
 ## Prerequisites
 
+* Run `ansible-galaxy install -r requirements.yml` to install the Ansible dependencies.
+
 * Create 5 machines or cloud instances, 1 bootstrap, 1 master, 1 public agent and one more agents.
 
 * Add their hostnames and IPs to `/etc/hosts`
