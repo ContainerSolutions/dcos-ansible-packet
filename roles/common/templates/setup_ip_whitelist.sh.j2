@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ipset create whitelist -! hash:ip
+ipset create whitelist -! hash:net
 
 # User IPs
 {% for local_ip in local_ips %}
