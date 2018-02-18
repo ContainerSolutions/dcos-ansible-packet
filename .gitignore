@@ -1,4 +1,6 @@
+.idea
+.vagrant
+roles/*\.*
+inventory
 playbook.retry
 vars.yaml
-.idea
-inventory

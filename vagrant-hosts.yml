@@ -1,0 +1,10 @@
+# Vagrant test nodes configuration
+---
+- name: bootstrap
+  memory: 512
+- name: master
+  memory: 512
+- name: public_agent
+  memory: 512
+- name: private_agent
+  memory: 512
