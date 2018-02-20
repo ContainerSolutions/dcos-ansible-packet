@@ -19,3 +19,5 @@ spartan_ips:
 packet_auth_token: foo
 packet_region: ams1
 dcos_download_path: /opt/dcos
+net_interface: bond0
+net_interface_label: bond0_0
