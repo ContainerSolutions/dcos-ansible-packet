@@ -2,9 +2,13 @@
 ---
 - name: bootstrap
   memory: 512
+  ip: 192.168.0.10
 - name: master
   memory: 512
+  ip: 192.168.0.20
 - name: public_agent
   memory: 512
+  ip: 192.168.0.30
 - name: private_agent
   memory: 512
+  ip: 192.168.0.40

@@ -5,7 +5,7 @@
 require 'yaml'
  
 # Read YAML file with box details
-servers = YAML.load_file('vagrant-hosts.yml')
+servers = YAML.load_file('tests/vagrant-hosts.yml')
 
 Vagrant.configure("2") do |config|
 
@@ -18,15 +18,24 @@ Vagrant.configure("2") do |config|
 
   (0..N).each do |machine_id|
     config.vm.define servers[machine_id]["name"] do |srv|
-      #srv.vm.network "private_network", ip: server["ip"]
+      srv.vm.network "private_network", ip: servers[machine_id]["ip"], virtualbox__intnet: true
+      #config.vm.network "public_network"
       srv.vm.provider :virtualbox do |vb|
         vb.name = servers[machine_id]["name"]
         vb.memory = servers[machine_id]["memory"]
       end
 
+      srv.vm.provision :shell do |shell|
+        shell.path = "tests/bootstrap-vagrant.sh"
+      end
+
+      # Reboot to apply selinux config
+      srv.vm.provision :reload
+
       # Only execute once the Ansible provisioner,
       # when all the machines are up and ready.
       if machine_id == N
+
         # Run Ansible from the Vagrant Host
         config.vm.provision "ansible" do |ansible|
           # Disable default limit to connect to all the machines
@@ -34,6 +43,9 @@ Vagrant.configure("2") do |config|
           ansible.playbook = "playbook.yml"
           ansible.become = true
           ansible.become_user = "root"
+          
+          # temp
+          ansible.skip_tags = "firewall"
           ansible.galaxy_role_file = "requirements.yml"
           ansible.groups = {
             "bootstrap"   => ["bootstrap"],
@@ -41,8 +53,9 @@ Vagrant.configure("2") do |config|
             "pubagents"   => ["public_agent"],
             "agents"      => ["private_agent"]
           }
-          ansible.verbose = "vvv"
+          #ansible.verbose = "vvv"
         end
+
       end
     end
   end
