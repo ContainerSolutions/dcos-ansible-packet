@@ -1,14 +1,14 @@
 # Vagrant test nodes configuration
 ---
 - name: bootstrap
-  memory: 512
+  memory: 1024
   ip: 192.168.0.10
 - name: master
-  memory: 512
+  memory: 1024
   ip: 192.168.0.20
 - name: public_agent
-  memory: 512
+  memory: 1024
   ip: 192.168.0.30
 - name: private_agent
-  memory: 512
+  memory: 1024
   ip: 192.168.0.40
