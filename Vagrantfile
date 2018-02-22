@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
       if machine_id == N
 
         # Run Ansible from the Vagrant Host
-        config.vm.provision "ansible" do |ansible|
+        srv.vm.provision "ansible" do |ansible|
           # Disable default limit to connect to all the machines
           ansible.limit = "all"
           ansible.playbook = "playbook.yml"
