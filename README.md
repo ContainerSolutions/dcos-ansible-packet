@@ -66,9 +66,9 @@ Requirements:
 - Vagrant + Virtualbox
 - 'vagrant-reload' plugin (https://github.com/aidanns/vagrant-reload)
 
-To provision the testing environment:
+A sample vars file is available under `tests/vars.yaml.sample`, which should be copied 
+to the project root folder as `vars.yaml` and adapted as necessary (particularly `local_ips`).
 
-- create a `vars.yaml` and set `net_interface`/`net_interface_label` vars to "eth1" and `cloud` to "vagrant" (for the specific "detect-ip" script)
-- execute `$ vagrant up`
+VM hosts (and respective static IP addresses) are defined in the `tests/vagrant-hosts.yml` YAML file.
 
-VM hosts (and respective static IP addresses) are defined in the `tests/vagrant-hosts.yml` YAML file
+To provision the testing environment execute `$ vagrant up` in the project root.
