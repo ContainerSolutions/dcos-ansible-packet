@@ -2,13 +2,14 @@
 
 - name: Ensure dcos_install.sh is downloaded from bootstrap server
   get_url:
-    url: "http://{{ hostvars[groups['bootstrap'][0]]['ansible_bond0_0']['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
-    dest: /root/dcos_install.sh
+    url: "http://{{ hostvars[groups['bootstrap'][0]]['ansible_'+net_interface_label]['ipv4']['address'] }}:{{ bootstrap_server_port }}/dcos_install.sh"
+    dest: "{{ dcos_download_path }}/dcos_install.sh"
     mode: 755
   tags: install-public-agent
 
 - name: Install DC/OS public agent
-  shell: /root/dcos_install.sh slave_public > dcos_install.log
+  shell: "{{ dcos_download_path }}/dcos_install.sh slave_public > {{ dcos_download_path }}/dcos_install.log"
   args:
     creates: /etc/systemd/system/dcos.target
+    chdir: "{{ dcos_download_path }}"
   tags: install-public-agent

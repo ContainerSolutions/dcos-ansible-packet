@@ -1,10 +1,11 @@
+# Sample Ansible vars file for testing playbooks with Vagrant
 ---
 cluster_name: my-cluster
 dcos_download_url: https://downloads.dcos.io/dcos/EarlyAccess/dcos_generate_config.sh?_ga=2.177384293.1745923283.1502273950-1637564556.1479832876
 epel_repo_url: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
 bootstrap_server_port: 5000
 loopback_ip: 127.0.0.1
-cloud: packet
+cloud: vagrant
 local_ips:
   - 85.191.81.60
   - 83.85.190.253
@@ -19,5 +20,5 @@ spartan_ips:
 packet_auth_token: foo
 packet_region: ams1
 dcos_download_path: /opt/dcos
-net_interface: bond0
-net_interface_label: bond0_0
+net_interface: eth1
+net_interface_label: eth1

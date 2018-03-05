@@ -9,32 +9,32 @@ ipset add whitelist -! {{ local_ip }}
 
 # Public master IPs
 {% for host in groups['masters'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface]['ipv4']['address'] }}
 {% endfor %}
 
 # Agent public IPs
 {% for host in groups['agents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface]['ipv4']['address'] }}
 {% endfor %}
 
 # Agent private IPs
 {% for host in groups['agents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface_label]['ipv4']['address'] }}
 {% endfor %}
 
 # Public agent public IPs
 {% for host in groups['pubagents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface]['ipv4']['address'] }}
 {% endfor %}
 
 # Public agent private IPs
 {% for host in groups['pubagents'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface_label]['ipv4']['address'] }}
 {% endfor %}
 
 # Private master IPs
 {% for host in groups['masters'] %}
-ipset add whitelist -! {{ hostvars[host]['ansible_bond0_0']['ipv4']['address'] }}
+ipset add whitelist -! {{ hostvars[host]['ansible_'+net_interface_label]['ipv4']['address'] }}
 {% endfor %}
 
 # Loopback

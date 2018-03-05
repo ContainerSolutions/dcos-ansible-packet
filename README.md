@@ -56,3 +56,19 @@ Add an IP to `local_ips` list in `vars.yaml.example` and run
 ```$ ansible-playbook -i inventory playbook.yml -t firewall```
 
 This will update the ipset rules. To learn more about the firewall read this [blog post](http://container-solutions.com/how-to-secure-dcos-packet-cluster-ip-whitelisting-ipset/)
+
+## Testing
+
+A Vagrant environment is available for local testing of setups.
+
+Requirements:
+
+- Vagrant + Virtualbox
+- 'vagrant-reload' plugin (https://github.com/aidanns/vagrant-reload)
+
+A sample vars file is available under `tests/vars.yaml.sample`, which should be copied 
+to the project root folder as `vars.yaml` and adapted as necessary (particularly `local_ips`).
+
+VM hosts (and respective static IP addresses) are defined in the `tests/vagrant-hosts.yml` YAML file.
+
+To provision the testing environment execute `$ vagrant up` in the project root.

@@ -28,8 +28,16 @@
     - jq
   tags: packages, common
 
+- name: Create DC/OS downloads directory
+  file:
+    path: "{{ dcos_download_path }}"
+    state: directory
+    mode: 0755
+    recurse: yes
+  tags: common
+
 - name: Ensure ipset script is uploaded
-  template: src=templates/setup_ip_whitelist.sh.j2 dest=/root/setup_ip_whitelist.sh mode=755 owner=root group=root mode=755
+  template: src=templates/setup_ip_whitelist.sh.j2 dest="{{ dcos_download_path }}/setup_ip_whitelist.sh" mode=755 owner=root group=root mode=755
   tags: firewall, common
 
 - name: Ensure syslog configuration for iptables log file
@@ -45,7 +53,7 @@
   tags: firewall, common
 
 - name: Ensure ipset script is executed
-  shell: ./setup_ip_whitelist.sh
+  shell: "{{ dcos_download_path }}/setup_ip_whitelist.sh"
   tags: firewall, common
 
 - name: Set up IPTables

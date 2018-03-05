@@ -1,28 +1,29 @@
 ---
 - name: Ensures genconf dir exists
-  file: path=genconf state=directory
+  file: path="{{ dcos_download_path }}/genconf" state=directory
   tags: genconf
 
 - name: Copy ip-detect script
-  copy: src=files/ip-detect-{{ cloud }}.sh dest=/root/genconf/ip-detect owner=root group=root mode=0755
+  copy: src=files/ip-detect-{{ cloud }}.sh dest="{{ dcos_download_path }}/genconf/ip-detect" owner=root group=root mode=0755
   tags: ipdetect
 
 - name: Copy config.yaml template
-  template: src=templates/config.yaml.j2 dest=/root/genconf/config.yaml owner=root group=root
+  template: src=templates/config.yaml.j2 dest="{{ dcos_download_path }}/genconf/config.yaml" owner=root group=root
   tags: config
 
 - name: Download dcos_generate_config.sh
   get_url:
     url: "{{ dcos_download_url }}"
-    dest: /root/dcos_generate_config.sh
+    dest: "{{ dcos_download_path }}/dcos_generate_config.sh"
     mode: 755
   tags: dcos_generate_config
   when: not ansible_check_mode
 
 - name: Execute dcos_generate_config.sh
-  shell: /root/dcos_generate_config.sh
+  shell: "{{ dcos_download_path }}/dcos_generate_config.sh"
   args:
    creates: /etc/systemd/system/dcos.target
+   chdir: "{{ dcos_download_path }}"
   tags: dcos_generate_config
   when: not ansible_check_mode
 
@@ -54,6 +55,6 @@
     command: nginx -g "daemon off;"
     image: nginx:1.13
     volumes:
-      - "/root/genconf/serve:/usr/share/nginx/html:ro" 
+      - "{{ dcos_download_path }}/genconf/serve:/usr/share/nginx/html:ro" 
     ports:
       - "{{ bootstrap_server_port }}:80"
